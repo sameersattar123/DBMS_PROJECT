@@ -1,18 +1,21 @@
 import express from "express";
+import dotenv from "dotenv"
 import cors from "cors"
 import mysql from "mysql";
 
+dotenv.config()
+
+const PORT = process.env.PORT;
 const app = express();
 
 app.use(express.json());
 app.use(cors())
 
-
-const db = mysql.createConnection({
+const db = mysql.createConnection({ 
   host: "localhost",
   user: "root",
-  password: "1234",
-  database: "test_schema",
+  password: process.env.MYSQL_PASSWORD,
+  database: "test_schema", 
 });
 
 app.get("/", (req, res) => {
@@ -44,6 +47,6 @@ app.post("/books", (req, res) => {
     });
   });
 
-app.listen(3000, () => {
-  console.log("server is running");
+app.listen(PORT, () => {
+  console.log(`server is running`); 
 });
