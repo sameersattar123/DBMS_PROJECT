@@ -10,9 +10,17 @@ const Books = () => {
     setBooks(data);
   };
 
+  const handleDelete = async(bookId) => {
+      const response = await fetch(`http://localhost:3000/books/${bookId}` , {
+        method: 'DELETE'
+      })
+      window.location.reload()
+  } 
   useEffect(() => {
     getBooks();
   }, []);
+
+
 
   return (
     <div>
@@ -25,8 +33,12 @@ const Books = () => {
             <h1>{book.title}</h1>
             <p>{book.desc}</p>
             <p>{book.price}</p>
-            <button>Delete</button>
-            <button>Update</button>
+            <button onClick={() => handleDelete(book.id)}>Delete</button>
+            <button>
+              <Link to={`/updateBook/${book.id}`}>
+                Update
+              </Link>
+              </button>
           </div>
         );
       })}
