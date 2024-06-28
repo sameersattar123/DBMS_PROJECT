@@ -39,7 +39,7 @@ app.post("/books", (req, res) => {
   ];
 
   db.query(q, [values], (err, data) => {
-    if (err) return res.send(err);
+    if (err) return res.send(err); 
     return res.json(data);
   });
 });
@@ -65,7 +65,7 @@ app.put("/books/:id", (req, res) => {
     req.body.cover,
   ];
 
-  db.query(q, [...values,bookId], (err, data) => {
+  db.query(q, [...values,bookId], (err, data) => {  
     if (err) return res.send(err);
     return res.json(data);
   });
@@ -75,5 +75,5 @@ app.put("/books/:id", (req, res) => {
 
 
 app.listen(PORT, () => {
-  console.log(`server is running`);
+  console.log(`server is running`); 
 });
